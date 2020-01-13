@@ -27,6 +27,7 @@
     "nodemailer": "^6.4.2",
     "normalize.css": "^8.0.1",
     "nuxt": "^2.0.0",
+    "qs": "^6.9.1",
     "sass-loader": "^8.0.1"
   },
   "devDependencies": {

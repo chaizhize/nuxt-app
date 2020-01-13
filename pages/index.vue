@@ -20,14 +20,15 @@
       }
     },
     components: {},
-    async asyncData() {
-      // let res = await axios.get('https://www.bitdata.pro/api/newsservice/getList?lang=zh-CN&type=237fb19abddbee099d4feb9dd596f51a&pageNum=1&limit=100')
-      // return {
-      //   list: res.data.data.result
-      // }
+    async asyncData(context) {
+      console.log(context,'dsds');
+      let res = await axios.get('https://www.bitdata.pro/api/newsservice/getList?lang=zh-CN&type=237fb19abddbee099d4feb9dd596f51a&pageNum=1&limit=100')
+      return {
+        list: res.data.data.result
+      }
     },
     mounted() {
-      this.getData()
+      // this.getData()
     },
     methods: {
       async getData() {

@@ -20,44 +20,49 @@
 
 <script>
   import axios from 'axios'
+  import {postUserLogin} from '@/api/users'
+
   export default {
     name: "login",
     data() {
       return {
         ruleForm: {
-          username:'',
-          password:'',
+          username: '',
+          password: '',
         },
-        rules:{
-          username:[
+        rules: {
+          username: [
             {
-              required:true,
-              message:'请输入用户名',
-              trigger:'blur'
+              required: true,
+              message: '请输入用户名',
+              trigger: 'blur'
             }
           ],
-          password:[
+          password: [
             {
-              required:true,
-              message:'请输入密码',
-              trigger:'blur'
+              required: true,
+              message: '请输入密码',
+              trigger: 'blur'
             }
           ]
         }
       }
     },
-    methods:{
-      submitForm(formName){
-        this.$refs[formName].validate((valid) => {
+    methods: {
+      submitForm(formName) {
+        this.$refs[formName].validate(async (valid) => {
           if (valid) {
             // this.$router.push({path:'/'})
 
-            axios.post('api/users/login',this.ruleForm)
-            .then(res=>{
-              if(res.data.code === 200){
-                this.$router.push({path:'/'})
-              }
-            })
+            try{
+
+              const result = await postUserLogin(this.ruleForm);
+              console.log(result);
+              this.$router.push({path:'/'})
+            }catch (e) {
+
+            }
+
           } else {
             console.log('error submit!!');
             return false;
@@ -69,19 +74,21 @@
 </script>
 
 <style scoped lang="scss">
-.login{
-  height: 100vh;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  .loginBtn{
+  .login {
+    height: 100vh;
     width: 100%;
-  }
-  .login_option{
     display: flex;
+    justify-content: center;
     align-items: center;
-    justify-content: space-between;
+
+    .loginBtn {
+      width: 100%;
+    }
+
+    .login_option {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
   }
-}
 </style>
