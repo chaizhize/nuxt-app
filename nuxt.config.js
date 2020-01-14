@@ -1,4 +1,4 @@
-
+console.log(process.env.NODE_ENV,'ddddddddssssssss');
 module.exports = {
   mode: 'universal',
   /*
@@ -32,7 +32,8 @@ module.exports = {
   ** Plugins to load before mounting the App
   */
   plugins: [
-    '@/plugins/element-ui'
+    '@/plugins/element-ui',
+    // '@/plugins/axios',
   ],
   /*
   ** Nuxt.js dev-modules
@@ -43,7 +44,11 @@ module.exports = {
   ** Nuxt.js modules
   */
   modules: [
+    '@nuxtjs/axios'
   ],
+  env: {
+    baseURL: '//www.cams.com'
+  },
   /*
   ** Build configuration
   */
@@ -53,14 +58,14 @@ module.exports = {
     ** You can extend webpack config here
     */
     extend (config, ctx) {
-      // if(ctx.isDev && ctx.isClient){
-      //   config.module.rules.push({
-      //     enforce: 'pre',
-      //     test: /\.(js|vue)$/,
-      //     loader: 'eslint-loader',
-      //     exclude: /(node_modules)/
-      //   })
-      // }
+      if(ctx.isDev && ctx.isClient){
+        config.module.rules.push({
+          enforce: 'pre',
+          test: /\.(js|vue)$/,
+          loader: 'eslint-loader',
+          exclude: /(node_modules)/
+        })
+      }
     },
     cache: false, //开发中缓存，加快编译速度
   }
