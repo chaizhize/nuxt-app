@@ -1,11 +1,9 @@
-export default function ({ $axios, redirect }) {
-  console.log($axios,'$axios');
+import {Message} from 'element-ui'
+export default function ({$axios, redirect}) {
+
   $axios.onRequest(config => {
-
-
-
-
-    console.log('Making request to ' + config)
+    config.baseURL = process.env.baseURL
+    return config;
   })
 
   $axios.onError(error => {
@@ -14,4 +12,10 @@ export default function ({ $axios, redirect }) {
       redirect('/400')
     }
   })
+
+  $axios.onResponse(
+    response => {
+      return response.data
+    }
+  )
 }

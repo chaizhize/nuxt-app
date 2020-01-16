@@ -4,7 +4,7 @@ import qs from 'qs';
 import {Message} from 'element-ui';
 
 const service = axios.create({
-  baseURL: '',
+  baseURL: '1231',
   timeout: 40000,
   transformRequest: [data => qs.stringify(data)],
   headers: {

@@ -7,13 +7,23 @@ let router = new Router({
 })
 router.post('/login',Login)
 
+
+
+
+
+
+
+
+
+
 router.get('/getData',async (ctx)=>{
 
-  const result = await axios.get('https://www.bitdata.pro/api/indexservice/getCarousel')
+  // const result = await axios.get('https://www.bitdata.pro/api/indexservice/getCarousel')
   // console.log(result,'resultresult');
+  // ctx.status = 500
   ctx.body = {
     code:200,
-    data:result.data.data.result
+    data:'312'
   }
 
 })

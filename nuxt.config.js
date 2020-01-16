@@ -1,4 +1,6 @@
-console.log(process.env.NODE_ENV,'ddddddddssssssss');
+console.log(12312312);
+console.log(process.env);
+
 module.exports = {
   mode: 'universal',
   /*
@@ -33,7 +35,8 @@ module.exports = {
   */
   plugins: [
     '@/plugins/element-ui',
-    // '@/plugins/axios',
+    '@/plugins/axios',
+    '@/plugins/route',
   ],
   /*
   ** Nuxt.js dev-modules
@@ -47,7 +50,7 @@ module.exports = {
     '@nuxtjs/axios'
   ],
   env: {
-    baseURL: '//www.cams.com'
+    baseURL: process.env.baseURL
   },
   /*
   ** Build configuration
@@ -55,7 +58,8 @@ module.exports = {
   build: {
     transpile: [/^element-ui/],
     /*
-    ** You can extend webpack config here
+    ** You
+    *  can extend webpack config here
     */
     extend (config, ctx) {
       if(ctx.isDev && ctx.isClient){

@@ -19,10 +19,11 @@
 </template>
 
 <script>
-  import axios from 'axios'
-  import {postUserLogin} from '@/api/users'
+  // import {postUserLogin} from '@/api/users'
+  import crypto from 'crypto'
 
   export default {
+    middleware: 'auth',
     name: "login",
     data() {
       return {
@@ -48,17 +49,18 @@
         }
       }
     },
+    mounted() {
+      console.log(this.$store);
+    },
     methods: {
-      submitForm(formName) {
+      async submitForm(formName) {
         this.$refs[formName].validate(async (valid) => {
           if (valid) {
-            // this.$router.push({path:'/'})
-
             try{
-
-              const result = await postUserLogin(this.ruleForm);
+              console.log(this.$store.state.users.user);
+              const result = await this.$store.dispatch('getUserLogin',this.ruleForm);
               console.log(result);
-              this.$router.push({path:'/'})
+              // this.$router.push({path:'/'})
             }catch (e) {
 
             }
