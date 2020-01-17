@@ -1,6 +1,8 @@
 import Router from 'koa-router'
 import Login from './login'
 import axios from '../../utils/axios'
+import loginCheck from '../../model/verifyModel'
+
 import {ErrorModel, SuccessModel} from "../../model/resmodel";
 let router = new Router({
   prefix:'/api/users'
@@ -16,14 +18,20 @@ router.post('/login',Login)
 
 
 
-router.get('/getData',async (ctx)=>{
+router.get('/getData',loginCheck,async (ctx)=>{
 
   // const result = await axios.get('https://www.bitdata.pro/api/indexservice/getCarousel')
   // console.log(result,'resultresult');
   // ctx.status = 500
+  // console.log(ctx.request.header.cookie,'ctxctxctxctx');
+  // console.log(ctx.cookies.get('mt'),'ctxctxctxctx');
+
   ctx.body = {
     code:200,
-    data:'312'
+    data:{
+      data:123
+    },
+
   }
 
 })

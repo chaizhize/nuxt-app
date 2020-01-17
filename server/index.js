@@ -6,9 +6,10 @@ const {Nuxt, Builder} = require('nuxt')
 
 import bodyParser from 'koa-bodyparser'
 import session from 'koa-generic-session'
-import Redis from 'koa-redis'
+import storeRedis from 'koa-redis'
 import Json from 'koa-json'
 
+const {REDIS_CONF} = require('./config/db')
 
 import users from './interface/users/index'
 
@@ -33,7 +34,14 @@ async function start() {
   app.use(session({
     key: 'mt',
     prefix: 'mt:uid',
-    store: new Redis()
+    cookie: {
+      path: '/', // 默认配置
+      httpOnly: true, //默认配置
+      maxAge: 24 * 60 * 60 * 1000
+    },
+    store: storeRedis({
+      all: `${REDIS_CONF.host}:${REDIS_CONF.port}`  //先写死本地的 redis
+    })
   }))
 
   app.use(bodyParser({
@@ -52,7 +60,7 @@ async function start() {
   }
 
 
-  app.use(users.routes()).use(users.allowedMethods())
+  app.use(users.routes(),users.allowedMethods())
 
   app.use((ctx) => {
     ctx.status = 200

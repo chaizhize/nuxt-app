@@ -57,7 +57,7 @@
         this.$refs[formName].validate(async (valid) => {
           if (valid) {
             try{
-              console.log(this.$store.state.users.user);
+              console.log(this.$store);
               const result = await this.$store.dispatch('getUserLogin',this.ruleForm);
               console.log(result);
               // this.$router.push({path:'/'})
